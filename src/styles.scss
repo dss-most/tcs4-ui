@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+$custom-typography: mat-typography-config(
+    $font-family: 'Tahoma'
+);
+
+@include mat-core($custom-typography);
+
+body { margin: 0; }
+
+table {
+  width: 100%;
+}
+
+.form-vertical {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-vertical > * {
+  width: 100%;
+}
