@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule }    from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
@@ -25,6 +26,7 @@ import { TestingFeeComponent } from './testing-fee/testing-fee.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,

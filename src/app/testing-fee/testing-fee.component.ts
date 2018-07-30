@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 export interface PeriodicElement {
   name: string;
@@ -30,8 +31,13 @@ export class TestingFeeComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+  greeting = null;
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    http.get('http://localhost:8080/tcs4/test')
+    .subscribe(response => this.greeting = response);
+
+   }
 
   ngOnInit() {
   }

@@ -1,3 +1,11 @@
+<div class="content">
+
+    <h1>Greeting</h1>
+    <div *ngIf="greeting">
+      <p>The ID is {{greeting.id}}</p>
+      <p>The content is {{greeting.content}}</p>
+    </div>
+
 <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       ค้นหาข้อมูล
@@ -52,3 +60,4 @@
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
+</div>
