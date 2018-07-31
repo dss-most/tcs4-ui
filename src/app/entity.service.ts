@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { TestMethod } from './domain/test-method';
+import { Page } from './domain/page';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,12 @@ export class EntityService {
 
   constructor(private http: HttpClient) { }
 
-  getTestMethod(
-    pageNumber = 0, pageSize= 10): Observable<TestMethod[]> {
-      return this.http.get(this.apiUrl('/TestMethod'), {
+  findAllTestMethod(
+    pageNumber = 0, pageSize= 10): Observable<Page<TestMethod[]>> {
+      return this.http.get<Page<TestMethod[]>>(this.apiUrl('/TestMethod'), {
         params: new HttpParams()
-          .set('pagerNumber', pageNumber.toString())
+          .set('pageNum', pageNumber.toString())
           .set('pageSize', pageSize.toString())
-      }).pipe(
-        map(response => response['payload'])
-      );
+      });
   }
 }

@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
   MatListModule, MatCardModule, MatGridListModule, MatFormFieldModule, MatInputModule,
-  MatTableModule, MatExpansionModule, MatProgressSpinnerModule,
+  MatTableModule, MatExpansionModule, MatProgressSpinnerModule, MatProgressBarModule,
   MatPaginatorModule
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -46,7 +46,8 @@ import { TestingFeeComponent } from './testing-fee/testing-fee.component';
     MatTableModule,
     MatPaginatorModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
