@@ -10,9 +10,10 @@ export class TestMethodDataSource implements DataSource<TestMethod> {
 
   private testMethods = new BehaviorSubject<TestMethod[]>([]);
   private loadingTestMethod = new BehaviorSubject<boolean>(false);
-  private totalElements: number = 0;
+  private totalElements = new BehaviorSubject<number>(0);
 
   public loading$ = this.loadingTestMethod.asObservable();
+  public totalElelments$ = this.totalElements.asObservable();
 
   constructor(private entityService: EntityService) {}
 
@@ -25,20 +26,16 @@ export class TestMethodDataSource implements DataSource<TestMethod> {
     this.loadingTestMethod.complete();
   }
 
-  getTotalElements(): number {
-    return this.totalElements;
-  }
-
-  loadTestMethods(pageIndex = 0, pageSize = 10) {
+  loadTestMethods(pageIndex = 0, pageSize = 10, sortField= '', sortDirection= '') {
    this.loadingTestMethod.next(true);
-   this.entityService.findAllTestMethod(pageIndex, pageSize).pipe(
+   this.entityService.findAllTestMethod(pageIndex, pageSize, sortField, sortDirection).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingTestMethod.next(false))
    )
    .subscribe( (res: Page<TestMethod[]>) => {
-     this.totalElements = res.totalElements;
+     this.totalElements.next(res['totalElements']);
      return this.testMethods.next(res['content']);
-    })
+    });
   }
 
 }

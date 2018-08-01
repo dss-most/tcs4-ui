@@ -12,7 +12,7 @@ import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
   MatListModule, MatCardModule, MatGridListModule, MatFormFieldModule, MatInputModule,
   MatTableModule, MatExpansionModule, MatProgressSpinnerModule, MatProgressBarModule,
-  MatPaginatorModule
+  MatPaginatorModule, MatSortModule
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyNavComponent } from './my-nav/my-nav.component';
@@ -47,7 +47,8 @@ import { TestingFeeComponent } from './testing-fee/testing-fee.component';
     MatPaginatorModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

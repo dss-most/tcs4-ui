@@ -20,11 +20,13 @@ export class EntityService {
   constructor(private http: HttpClient) { }
 
   findAllTestMethod(
-    pageNumber = 0, pageSize= 10): Observable<Page<TestMethod[]>> {
+    pageNumber = 0, pageSize= 10, sortField= '', sortDirection= ''): Observable<Page<TestMethod[]>> {
       return this.http.get<Page<TestMethod[]>>(this.apiUrl('/TestMethod'), {
         params: new HttpParams()
           .set('pageNum', pageNumber.toString())
           .set('pageSize', pageSize.toString())
+          .set('sortField', sortField)
+          .set('sortDirection', sortDirection)
       });
   }
 }
