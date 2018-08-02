@@ -26,9 +26,9 @@ export class TestMethodDataSource implements DataSource<TestMethod> {
     this.loadingTestMethod.complete();
   }
 
-  loadTestMethods(pageIndex = 0, pageSize = 10, sortField= '', sortDirection= '') {
+  loadTestMethods(query= '', pageIndex = 0, pageSize = 10, sortField= '', sortDirection= '') {
    this.loadingTestMethod.next(true);
-   this.entityService.findAllTestMethod(pageIndex, pageSize, sortField, sortDirection).pipe(
+   this.entityService.findAllTestMethod(query, pageIndex, pageSize, sortField, sortDirection).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingTestMethod.next(false))
    )

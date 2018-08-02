@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { MatPaginator, MatSpinner, MatSort } from '@angular/material';
 import { EntityService } from '../entity.service';
 import { TestMethodDataSource } from '../datasource/test-method-data-source';
-import { tap } from 'rxjs/operators';
-import { merge } from 'rxjs';
+import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { merge, fromEvent } from 'rxjs';
 export interface TestingMethod {
   id: number;
   code: string;
@@ -27,6 +27,8 @@ export class TestingFeeComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  @ViewChild('input') input: ElementRef;
+
   constructor(private entityService: EntityService) {
    }
 
@@ -39,6 +41,19 @@ export class TestingFeeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // server-side search
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          console.log(this.input.nativeElement.value);
+          this.paginator.pageIndex = 0;
+          this.loadTestMethods();
+        })
+      ).subscribe();
+
+
     this.sort.sortChange.subscribe( () => this.paginator.pageIndex = 0 );
 
     merge(this.sort.sortChange, this.paginator.page)
@@ -50,6 +65,7 @@ export class TestingFeeComponent implements OnInit, AfterViewInit {
 
   loadTestMethods() {
     this.dataSource.loadTestMethods(
+      this.input.nativeElement.value,
       this.paginator.pageIndex,
       this.paginator.pageSize,
       this.sort.active,
